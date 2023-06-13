@@ -64,7 +64,7 @@ else
 fi
 ```
 
-`begin.sh`
+`begin.sh` 没啥用，更方便其他操作吧？
 
 ```sh
 command="./start.sh"
