@@ -35,7 +35,7 @@ export DISABLE_REGION=true
 # 下面是一些信息
 export SITE_NAME=dbin的小站
 export SITE_URL=https://dbinfun.net
-# 安全域名
+# 安全域名,这是可以跨域访问waline的域名
 export SECURE_DOMAINS=example.com
 # 必须登录才能评论,可以不要
 export LOGIN=force
@@ -109,26 +109,12 @@ import type { WalineOptions } from 'valaxy-addon-waline/types'
 const props = defineProps<{
   options: WalineOptions
 }>()
-
 const route = useRoute()
 const { locale } = useI18n()
 const path = computed(() => props.options.path || route.path.replace(/\/$/, ''))
-// 自定一emoji
-const emoji = computed(() => function (){
-  let emoji = props.options.emoji
-  if(emoji===undefined){
-    return [
-      'https://unpkg.com/@waline/emojis@1.1.0/bilibili/',
-      'https://unpkg.com/@waline/emojis@1.1.0/bmoji/',
-      'https://unpkg.com/@waline/emojis@1.1.0/qq/'
-    ]
-  }else{
-    return emoji
-  }
-}())
+const emoji = computed(() => props.options.emoji)
 
 onMounted(() => {
-  console.log("tests")
   const { pageview, comment } = props.options
   if (pageview) {
     pageviewCount({
